@@ -48,30 +48,45 @@ function generateRandomEquation() {
 function showEquation() {
     //generate an actual equation that will be displayed to the user
     let actualEquation = generateRandomEquation();
+    //find the question element in the webpage
     let questionP = document.getElementById('question');
+    //if found, set the content of the question as the equation previously determined
     if (questionP) {
+        //set questionP's textContent as actualEquation
         questionP.textContent = actualEquation;
     }
 }
 
+//check the answer inputted by the user
 function checkAnswer() {
+    //get the answer inputted by the user
     const answerInput = document.getElementById('answer');
+    //parse the value inputted by the user
     const inputValue = answerInput.value.trim();
 
     // If input is blank, treat as incorrect
     if (inputValue === "") {
+        //clear the timer bar
         clearInterval(timerInterval);
+        //temporarily store the user's score so it doesn't get reset
         localStorage.setItem('score', score);
+        //make the user play gun roulette
         playRoulette();
         return;
     }
-
+    
     let userAnswer = Number(inputValue);
+    //if the user's answer is correct,
     if (userAnswer === correctAnswer) {
-        clearInterval(timerInterval); // Pause timer
+        //pause the timer
+        clearInterval(timerInterval);
+        //increase the score by 1
         score += 1;
+        //display the user's current score
         document.getElementById('score').textContent = score;
+        //congratulate the user
         document.getElementById('result').textContent = "Correct!";
+        
         setTimeout(() => {
             document.getElementById('result').textContent = "";
             showEquation();
@@ -80,15 +95,21 @@ function checkAnswer() {
             startTimer(3); // Restart timer for next question
         }, 1200); // 1.2 seconds pause
     } else {
+        //pause the timer
         clearInterval(timerInterval);
+        //temporarily store the score of the user so it doesn't get reset
         localStorage.setItem('score', score);
+        //make the user play gun roulette
         playRoulette();
     }
 }
-
+//start a timer for how long the user has to answer the question that takes a duration
 function startTimer(duration) {
+    //declare the timer bar that will be displayed to the user
     const timerBar = document.getElementById('timer-bar');
+    //clear the previous timer, if there was one
     timerBar.innerHTML = ""; // Clear previous timer
+    //
     const timerFill = document.createElement('div');
     timerBar.appendChild(timerFill);
 
