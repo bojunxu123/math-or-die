@@ -3,8 +3,9 @@ const cockingAudio = new Audio('cocking.mp3');
 const gunshotAudio = new Audio('gunFire.mp3');
 const failedShotAudio = new Audio('failedFire.mp3');
 
+//declare the correct answer, the timer intervals
 let correctAnswer = null;
-let timerInterval = null; // Store timer interval globally
+let timerInterval = null; 
 let score = 0;
 let rouletteInProgress = false;
 
