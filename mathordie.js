@@ -3,19 +3,24 @@ const cockingAudio = new Audio('cocking.mp3');
 const gunshotAudio = new Audio('gunFire.mp3');
 const failedShotAudio = new Audio('failedFire.mp3');
 
-//declare the correct answer, the timer intervals
+//declare the correct answer, the timer interval, the initial score, and whether the gun screen is in progress
 let correctAnswer = null;
 let timerInterval = null; 
 let score = 0;
 let rouletteInProgress = false;
 
+//generates random equation as a string
 function generateRandomEquation() {
+    //declare an array of possible operators
     const operators = ['+', '-', '*', '/'];
+    //generate random first and second numbers 1-10
     const num1 = Math.floor(Math.random() * 10) + 1;
     const num2 = Math.floor(Math.random() * 10) + 1;
+    //choose a random operator from the operators array
     const operator = operators[Math.floor(Math.random() * operators.length)];
-
+    //declare the equation variable
     let equation;
+    //for any possible operator chosen by line 20, generate an equation and the correct answer
     switch (operator) {
         case '+':
             equation = `${num1} + ${num2}`;
@@ -31,14 +36,17 @@ function generateRandomEquation() {
             break;
         case '/':
             equation = `${num1} / ${num2}`;
+            //note that the answer for any division problem will always be rounded to the nearest whole number
             correctAnswer = Math.round(num1 / num2);
             break;
     }
+    //return the equation in the form of a string
     return equation;
 }
 
-// Display the math question to the user
+//display the math question to the user
 function showEquation() {
+    //generate an actual equation that will be displayed to the user
     let actualEquation = generateRandomEquation();
     let questionP = document.getElementById('question');
     if (questionP) {
