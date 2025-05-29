@@ -160,16 +160,20 @@ function playRoulette() {
 
     cockingAudio.currentTime = 0;
     cockingAudio.play();
-
+    //set timeout for 1 second
     setTimeout(function() {
+        //1 in 3 chance the player dies
         if (Math.floor(Math.random() * 3) === 0) {
-            // Player dies
+            //display the fire effect coming out of the gun
             document.getElementById('fire').style.display = 'block';
+            //display the play again button
             document.getElementById('play-again').style.display = 'block';
-            // Show final score
+            //show final score
             finalScoreDiv.textContent = `Final Score: ${score}`;
+            
             finalScoreDiv.style.display = 'block';
-            gunshotAudio.currentTime = 0;
+            gunshotAudio.currentTime = 0
+            //play the gunshot audio
             gunshotAudio.play();
             gunshotAudio.onended = function() {
                 rouletteInProgress = false;
